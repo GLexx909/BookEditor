@@ -1,0 +1,8 @@
+.container {
+    width: fit-content;
+    margin: 50px auto;
+}
+
+.chapterTitle {
+    border-bottom: 3px solid black;
+}

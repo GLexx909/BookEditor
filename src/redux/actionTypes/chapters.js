@@ -1,0 +1,3 @@
+export const ADD_CHAPTER = 'ADD_CHAPTER'
+export const ADD_SECTION = 'ADD_SECTION'
+export const TOGGLE_SECTION = 'TOGGLE_SECTION'
