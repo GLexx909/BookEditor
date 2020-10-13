@@ -1,14 +1,14 @@
 // import { connect } from 'react-redux'
 //
 // import SectionList from './SectionList'
-// import { addSection } from '../../../../../redux/actions/sections'
+// import { filterSections } from '../../../../../redux/actions/sections'
 //
-// const mapStateToProps = ({ sections }) => {
-//   return { sections }
+// const mapStateToProps = ({ filteredSections }) => {
+//   return { filteredSections }
 // }
 //
 // const mapDispatchToProps = {
-//   addSection
+//   filterSections
 // }
 //
 // export default connect(mapStateToProps, mapDispatchToProps)(SectionList)

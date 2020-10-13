@@ -5,3 +5,12 @@
 .input {
     background-color: burlywood;
 }
+
+.sectionBlock {
+    display: flex;
+}
+
+.sectionBlock input {
+    margin: auto 0;
+    margin-right: 10px;
+}

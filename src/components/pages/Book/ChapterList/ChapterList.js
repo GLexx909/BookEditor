@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './index.module.css'
 import SectionList from "./SectionList/SectionList";
 
-const ChapterList = ({ chapters, addChapter, addSection, toggleSection }) => {
+const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSections }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,6 +20,16 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection }) => {
     toggleSection(chapterIndex, sectionIndex)
   }
 
+  const filters = {
+    FILTER_ALL_SECTIONS: () => true,
+    FILTER_COMPLETED_SECTIONS: (sec) => sec.completed,
+    FILTER_NOT_COMPLETED_SECTIONS: (sec) => !sec.completed
+  }
+
+  const filteredSections = (chapter) => (
+    chapter.sections.filter(filters[chapter.sectionFilter])
+  )
+
   return (
     <div className={styles.container}>
       {
@@ -30,9 +40,10 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection }) => {
               {chapter.completed && <b>_________________ЗАВЕРШЕНО</b>}
             </p>
             <SectionList
-              sections={chapter.sections}
+              sections={filteredSections(chapter)}
               addNewSection={addNewSection}
               toggleSectionReady={toggleSectionReady}
+              filterSections={filterSections}
               chapterIndex={index}/>
           </div>
         ))
@@ -40,6 +51,7 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection }) => {
 
       <form
         onSubmit={(e) => handleSubmit(e)}
+        className={styles.form}
       >
         <input type="text" name="text"/>
         <button>Add chapter</button>

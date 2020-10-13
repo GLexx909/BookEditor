@@ -13,7 +13,7 @@ export const chapters = function (state = initialState, action) {
   switch (action.type) {
 
     case 'ADD_CHAPTER':
-      return state.concat({ text: action.text, completed: false, sections: [] })
+      return state.concat({ text: action.text, completed: false, sections: [], sectionFilter: 'FILTER_ALL_SECTIONS' })
     case 'ADD_SECTION':
       return state.map((chapter, index) => (
         index === action.payload.chapterIndex
@@ -28,12 +28,30 @@ export const chapters = function (state = initialState, action) {
 
       const isChapterCompleted = isSectionAlone && theChapter.sections.indexOf(theUncompletedSections[0]) === action.payload.sectionIndex
 
-      console.log(isSectionAlone)
-      console.log(theChapter.sections.indexOf(theUncompletedSections[0]) === action.payload.sectionIndex)
-
       return state.map((chapter, index) => (
         index === action.payload.chapterIndex
           ? {...chapter, sections: mapSectionToggle(chapter, action.payload.sectionIndex), completed: isChapterCompleted }
+          : chapter
+      ))
+
+    case 'FILTER_COMPLETED_SECTIONS':
+      return state.map((chapter, index) => (
+        index === action.payload.chapterIndex
+          ? {...chapter, sectionFilter: 'FILTER_COMPLETED_SECTIONS'}
+          : chapter
+      ))
+
+    case 'FILTER_NOT_COMPLETED_SECTIONS':
+      return state.map((chapter, index) => (
+        index === action.payload.chapterIndex
+          ? {...chapter, sectionFilter: 'FILTER_NOT_COMPLETED_SECTIONS'}
+          : chapter
+      ))
+
+    case 'FILTER_ALL_SECTIONS':
+      return state.map((chapter, index) => (
+        index === action.payload.chapterIndex
+          ? {...chapter, sectionFilter: 'FILTER_ALL_SECTIONS'}
           : chapter
       ))
 

@@ -14,3 +14,8 @@ export const toggleSection = (chapterIndex, sectionIndex) => ({
   type: chaptersActions.TOGGLE_SECTION,
   payload: { chapterIndex, sectionIndex }
 })
+
+export const filterSections = (chapterIndex, type) => ({
+  type: type,
+  payload: { chapterIndex }
+})
