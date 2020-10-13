@@ -12,7 +12,7 @@ const SectionList = ({ sections, addNewSection, chapterIndex, toggleSectionReady
       {
         sections && sections.map((section, index) => (
           <div key={index} className={styles.sectionBlock} >
-            <input type="checkbox" defaultChecked={section.completed} onClick={() => toggleSectionReady(chapterIndex, index)}/>
+            <input type="checkbox" checked={section.completed} onChange={() => toggleSectionReady(chapterIndex, index)}/>
             <p>{section.text}</p>
           </div>
         ))
