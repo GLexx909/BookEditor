@@ -4,13 +4,17 @@ import * as chapterActions from '../../../../../redux/actionTypes/chapters'
 
 const SectionList = ({ sections, addNewSection, chapterIndex, toggleSectionReady, filterSections }) => {
 
+  const showAll = () => filterSections(chapterIndex, chapterActions.FILTER_ALL_SECTIONS)
+  const showCompleted = () => filterSections(chapterIndex, chapterActions.FILTER_COMPLETED_SECTIONS)
+  const showNotCompleted = () => filterSections(chapterIndex, chapterActions.FILTER_NOT_COMPLETED_SECTIONS)
+
   return (
     <div className={styles.container}>
-      <button onClick={() => filterSections(chapterIndex, chapterActions.FILTER_ALL_SECTIONS)}>All</button>
-      <button onClick={() => filterSections(chapterIndex, chapterActions.FILTER_COMPLETED_SECTIONS)}>Checked</button>
-      <button onClick={() => filterSections(chapterIndex, chapterActions.FILTER_NOT_COMPLETED_SECTIONS)}>Not Checked</button>
+      <button onClick={() => showAll()}>All</button>
+      <button onClick={() => showCompleted()}>Checked</button>
+      <button onClick={() => showNotCompleted()}>Not Checked</button>
       {
-        sections && sections.map((section, index) => (
+        sections.length > 0 && sections.map((section, index) => (
           <div key={index} className={styles.sectionBlock} >
             <input type="checkbox" checked={section.completed} onChange={() => toggleSectionReady(chapterIndex, index)}/>
             <p>{section.text}</p>

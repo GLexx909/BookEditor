@@ -20,16 +20,6 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSe
     toggleSection(chapterIndex, sectionIndex)
   }
 
-  const filters = {
-    FILTER_ALL_SECTIONS: () => true,
-    FILTER_COMPLETED_SECTIONS: (sec) => sec.completed,
-    FILTER_NOT_COMPLETED_SECTIONS: (sec) => !sec.completed
-  }
-
-  const filteredSections = (chapter) => (
-    chapter.sections.filter(filters[chapter.sectionFilter])
-  )
-
   return (
     <div className={styles.container}>
       {
@@ -40,7 +30,7 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSe
               {chapter.completed && <b>_________________ЗАВЕРШЕНО</b>}
             </p>
             <SectionList
-              sections={filteredSections(chapter)}
+              sections={chapter.sections}
               addNewSection={addNewSection}
               toggleSectionReady={toggleSectionReady}
               filterSections={filterSections}
