@@ -19,3 +19,23 @@ export const filterSections = (chapterIndex, type) => ({
   type: type,
   payload: { chapterIndex }
 })
+
+export const sortChapters = (oldIndex, newIndex) => ({
+  type: chaptersActions.SORT_CHAPTERS,
+  payload: { oldIndex, newIndex }
+})
+
+export const sortSections = (chapterIndex, oldIndex, newIndex) => ({
+  type: chaptersActions.SORT_SECTIONS,
+  payload: { chapterIndex, oldIndex, newIndex }
+})
+
+export const changeModalOpen = (chapterIndex, sectionIndex) => ({
+  type: chaptersActions.SECTION_OPEN_MODAL,
+  payload: { chapterIndex, sectionIndex }
+})
+
+export const onDropSection = (oldChapterIndex, newChapterIndex, sectionIndex) => ({
+  type: chaptersActions.ON_DROP_SECTION,
+  payload: { oldChapterIndex, newChapterIndex, sectionIndex }
+})

@@ -1,7 +1,14 @@
 import { connect } from 'react-redux'
 
 import ChapterList from './ChapterList'
-import { addChapter, addSection, toggleSection, filterSections } from '../../../../redux/actions/chapters'
+import {
+  addChapter,
+  addSection,
+  toggleSection,
+  filterSections,
+  sortChapters,
+  sortSections
+} from '../../../../redux/actions/chapters'
 
 const filters = {
   FILTER_ALL_SECTIONS: () => true,
@@ -21,7 +28,9 @@ const mapDispatchToProps = {
   addChapter,
   addSection,
   toggleSection,
-  filterSections
+  filterSections,
+  sortChapters,
+  sortSections
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChapterList)

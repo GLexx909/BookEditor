@@ -1,9 +1,19 @@
+import arrayMove from 'array-move';
+
 const initialState = []
 
 const mapSectionToggle = (chapter, sectionIndex) => {
   return chapter.sections.map((section, index) => (
     index === sectionIndex
       ? { ...section, completed: !section.completed }
+      : section
+  ))
+}
+
+const mapSectionModalToggle = (chapter, sectionIndex) => {
+  return chapter.sections.map((section, index) => (
+    index === sectionIndex
+      ? { ...section, modalOpen: !section.modalOpen }
       : section
   ))
 }
@@ -17,13 +27,13 @@ export const chapters = function (state = initialState, action) {
     case 'ADD_SECTION':
       return state.map((chapter, index) => (
         index === action.payload.chapterIndex
-          ? {...chapter, sections: chapter.sections.concat({text: action.payload.text, completed: false})}
+          ? {...chapter, sections: chapter.sections.concat({text: action.payload.text, completed: false, modalOpen: false})}
           : chapter
       ))
 
     case 'TOGGLE_SECTION':
       const theChapter = state[action.payload.chapterIndex]
-      const theUncompletedSections =  theChapter.sections.filter((sec, index) => !sec.completed)
+      const theUncompletedSections =  theChapter.sections.filter((sec) => !sec.completed)
       const isSectionAlone = theUncompletedSections.length === 1
 
       const isChapterCompleted = isSectionAlone && theChapter.sections.indexOf(theUncompletedSections[0]) === action.payload.sectionIndex
@@ -54,6 +64,38 @@ export const chapters = function (state = initialState, action) {
           ? {...chapter, sectionFilter: 'FILTER_ALL_SECTIONS'}
           : chapter
       ))
+
+    case 'SORT_CHAPTERS':
+      return (
+        arrayMove(state, action.payload.oldIndex, action.payload.newIndex)
+      )
+
+    case 'SORT_SECTIONS':
+      return state.map((chapter, index) => (
+        index === action.payload.chapterIndex
+          ? {...chapter, sections: arrayMove(chapter.sections, action.payload.oldIndex, action.payload.newIndex) }
+          : chapter
+      ))
+
+    case 'SECTION_OPEN_MODAL':
+      return state.map((chapter, index) => (
+        index === action.payload.chapterIndex
+          ? {...chapter, sections: mapSectionModalToggle(chapter, action.payload.sectionIndex) }
+          : chapter
+      ))
+
+    case 'ON_DROP_SECTION':
+      const sectionObject = state[action.payload.oldChapterIndex].sections[action.payload.sectionIndex]
+
+      return state.map((chapter, index) => {
+        if (index === action.payload.oldChapterIndex) {
+          return {...chapter, sections: chapter.sections.filter((_, index) => index !== action.payload.sectionIndex)}
+        } else if (index === action.payload.newChapterIndex) {
+          return {...chapter, sections: chapter.sections.concat(sectionObject)}
+        } else {
+          return chapter
+        }
+      })
 
     default:
       return state

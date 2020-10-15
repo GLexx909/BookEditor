@@ -10,6 +10,11 @@
     display: flex;
 }
 
+.sectionBlock > p:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+
 .sectionBlock input {
     margin: auto 0;
     margin-right: 10px;
