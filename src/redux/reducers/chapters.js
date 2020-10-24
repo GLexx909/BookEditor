@@ -18,6 +18,14 @@ const mapSectionModalToggle = (chapter, sectionIndex) => {
   ))
 }
 
+const isAnyUncompletedSectionPresent = (chapter) => {
+  const sections = chapter.sections
+  const isAnyNotCompletedSection = sections.filter(section => !section.completed).length > 0
+
+  return sections.length > 0 && !isAnyNotCompletedSection
+}
+
+
 export const chapters = function (state = initialState, action) {
 
   switch (action.type) {
@@ -77,21 +85,37 @@ export const chapters = function (state = initialState, action) {
           : chapter
       ))
 
-    case 'SECTION_OPEN_MODAL':
-      return state.map((chapter, index) => (
-        index === action.payload.chapterIndex
-          ? {...chapter, sections: mapSectionModalToggle(chapter, action.payload.sectionIndex) }
-          : chapter
-      ))
-
     case 'ON_DROP_SECTION':
       const sectionObject = state[action.payload.oldChapterIndex].sections[action.payload.sectionIndex]
 
       return state.map((chapter, index) => {
         if (index === action.payload.oldChapterIndex) {
-          return {...chapter, sections: chapter.sections.filter((_, index) => index !== action.payload.sectionIndex)}
+          return {
+            ...chapter,
+            sections: chapter.sections.filter((_, index) => index !== action.payload.sectionIndex)
+          }
         } else if (index === action.payload.newChapterIndex) {
-          return {...chapter, sections: chapter.sections.concat(sectionObject)}
+          return {
+            ...chapter,
+            sections: chapter.sections.concat(sectionObject)
+          }
+        } else {
+          return chapter
+        }
+      })
+
+    case 'RECALCULATE_CHAPTER_COMPLETED':
+      return state.map((chapter, index) => {
+        if (index === action.payload.oldChapterIndex) {
+          return {
+            ...chapter,
+            completed: isAnyUncompletedSectionPresent(chapter)
+          }
+        } else if (index === action.payload.newChapterIndex) {
+          return {
+            ...chapter,
+            completed: isAnyUncompletedSectionPresent(chapter)
+          }
         } else {
           return chapter
         }

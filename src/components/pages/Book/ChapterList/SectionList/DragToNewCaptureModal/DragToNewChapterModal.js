@@ -3,23 +3,29 @@ import ReactDOM from 'react-dom'
 import styles from './DragToNewChapterModal.module.css'
 import {connect} from "react-redux";
 import {
-  changeModalOpen,
-  onDropSection
+  onDropSection,
+  recalculateChapterCompleted
 } from "../../../../../../redux/actions/chapters";
 
 class DragToNewChapterModal extends React.Component {
+
   constructor(props) {
     super(props);
-    this.isModalOpen = this.props.isModalOpen
+
+    this.state = {
+      isModalOpen: false
+    }
+
   }
 
   toggleModal(){
-    this.props.changeModalOpen(this.props.chapterIndex, this.props.sectionIndex)
+    this.setState({isModalOpen: !this.state.isModalOpen})
   }
 
   dropSection(index){
     this.toggleModal()
     this.props.onDropSection(this.props.chapterIndex, index, this.props.sectionIndex)
+    this.props.recalculateChapterCompleted(this.props.chapterIndex, index)
   }
 
   render() {
@@ -27,7 +33,7 @@ class DragToNewChapterModal extends React.Component {
       <div className={styles.drag}>
         <button onClick={() => this.toggleModal()}>Перемести в другую главу</button>
         {
-          this.isModalOpen && ReactDOM.createPortal(
+          this.state.isModalOpen && ReactDOM.createPortal(
             <div className={styles.overlay}>
               <div className={styles.body}>
 
@@ -54,8 +60,8 @@ const mapStateToProps = ({ chapters }) => {
 }
 
 const mapDispatchToProps = {
-  changeModalOpen,
-  onDropSection
+  onDropSection,
+  recalculateChapterCompleted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DragToNewChapterModal)

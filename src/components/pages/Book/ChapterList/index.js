@@ -7,7 +7,8 @@ import {
   toggleSection,
   filterSections,
   sortChapters,
-  sortSections
+  sortSections,
+  recalculateChapterCompleted
 } from '../../../../redux/actions/chapters'
 
 const filters = {
@@ -30,7 +31,8 @@ const mapDispatchToProps = {
   toggleSection,
   filterSections,
   sortChapters,
-  sortSections
+  sortSections,
+  recalculateChapterCompleted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChapterList)

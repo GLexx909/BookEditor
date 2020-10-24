@@ -30,12 +30,12 @@ export const sortSections = (chapterIndex, oldIndex, newIndex) => ({
   payload: { chapterIndex, oldIndex, newIndex }
 })
 
-export const changeModalOpen = (chapterIndex, sectionIndex) => ({
-  type: chaptersActions.SECTION_OPEN_MODAL,
-  payload: { chapterIndex, sectionIndex }
-})
-
 export const onDropSection = (oldChapterIndex, newChapterIndex, sectionIndex) => ({
   type: chaptersActions.ON_DROP_SECTION,
   payload: { oldChapterIndex, newChapterIndex, sectionIndex }
+})
+
+export const recalculateChapterCompleted = (oldChapterIndex, newChapterIndex) => ({
+  type: chaptersActions.RECALCULATE_CHAPTER_COMPLETED,
+  payload: { oldChapterIndex, newChapterIndex }
 })
