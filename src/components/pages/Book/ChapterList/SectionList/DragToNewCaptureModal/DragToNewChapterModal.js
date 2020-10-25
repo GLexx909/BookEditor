@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import styles from './DragToNewChapterModal.module.css'
 import {connect} from "react-redux";
 import {
-  onDropSection,
-  recalculateChapterCompleted
+  moveSection
 } from "../../../../../../redux/actions/chapters";
 
 class DragToNewChapterModal extends React.Component {
@@ -24,8 +23,7 @@ class DragToNewChapterModal extends React.Component {
 
   dropSection(index){
     this.toggleModal()
-    this.props.onDropSection(this.props.chapterIndex, index, this.props.sectionIndex)
-    this.props.recalculateChapterCompleted(this.props.chapterIndex, index)
+    this.props.moveSection(this.props.chapterIndex, index, this.props.sectionIndex)
   }
 
   render() {
@@ -60,8 +58,7 @@ const mapStateToProps = ({ chapters }) => {
 }
 
 const mapDispatchToProps = {
-  onDropSection,
-  recalculateChapterCompleted
+  moveSection
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DragToNewChapterModal)

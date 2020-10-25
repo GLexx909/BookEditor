@@ -30,12 +30,7 @@ export const sortSections = (chapterIndex, oldIndex, newIndex) => ({
   payload: { chapterIndex, oldIndex, newIndex }
 })
 
-export const onDropSection = (oldChapterIndex, newChapterIndex, sectionIndex) => ({
-  type: chaptersActions.ON_DROP_SECTION,
+export const moveSection = (oldChapterIndex, newChapterIndex, sectionIndex) => ({
+  type: chaptersActions.MOVE_SECTION,
   payload: { oldChapterIndex, newChapterIndex, sectionIndex }
-})
-
-export const recalculateChapterCompleted = (oldChapterIndex, newChapterIndex) => ({
-  type: chaptersActions.RECALCULATE_CHAPTER_COMPLETED,
-  payload: { oldChapterIndex, newChapterIndex }
 })

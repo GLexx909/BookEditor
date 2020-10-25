@@ -10,14 +10,6 @@ const mapSectionToggle = (chapter, sectionIndex) => {
   ))
 }
 
-const mapSectionModalToggle = (chapter, sectionIndex) => {
-  return chapter.sections.map((section, index) => (
-    index === sectionIndex
-      ? { ...section, modalOpen: !section.modalOpen }
-      : section
-  ))
-}
-
 const isAnyUncompletedSectionPresent = (chapter) => {
   const sections = chapter.sections
   const isAnyNotCompletedSection = sections.filter(section => !section.completed).length > 0
@@ -85,10 +77,10 @@ export const chapters = function (state = initialState, action) {
           : chapter
       ))
 
-    case 'ON_DROP_SECTION':
+    case 'MOVE_SECTION':
       const sectionObject = state[action.payload.oldChapterIndex].sections[action.payload.sectionIndex]
 
-      return state.map((chapter, index) => {
+      const newState = state.map((chapter, index) => {
         if (index === action.payload.oldChapterIndex) {
           return {
             ...chapter,
@@ -104,8 +96,7 @@ export const chapters = function (state = initialState, action) {
         }
       })
 
-    case 'RECALCULATE_CHAPTER_COMPLETED':
-      return state.map((chapter, index) => {
+      return newState.map((chapter, index) => {
         if (index === action.payload.oldChapterIndex) {
           return {
             ...chapter,
