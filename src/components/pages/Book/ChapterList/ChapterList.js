@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './index.module.css'
 import SectionList from "./SectionList/SectionList";
+import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
-const ChapterList = ({ chapters, addChapter, addSection, toggleSection }) => {
+const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSections, sortChapters, sortSections }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -20,26 +21,43 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection }) => {
     toggleSection(chapterIndex, sectionIndex)
   }
 
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    sortChapters(oldIndex, newIndex)
+  };
+
+  const SortableChapter = SortableElement(({ chapter, chapterIndex }) => (
+      <li>
+        <p className={styles.chapterTitle}>
+          {chapter.text}
+          {chapter.completed && <b>_________________ЗАВЕРШЕНО</b>}
+        </p>
+        <SectionList
+          sections={chapter.sections}
+          addNewSection={addNewSection}
+          toggleSectionReady={toggleSectionReady}
+          filterSections={filterSections}
+          sortSections={sortSections}
+          chapterIndex={chapterIndex}/>
+      </li>
+  ))
+
+  const SortableList = SortableContainer(() => {
+    return (
+      <ul>
+        { chapters && chapters.map((chapter, index) => (
+          <SortableChapter key={index} chapter={chapter} index={index} chapterIndex={index}/>
+        ))}
+      </ul>
+    );
+  });
+
   return (
     <div className={styles.container}>
-      {
-        chapters && chapters.map((chapter, index) => (
-          <div key={index}>
-            <p className={styles.chapterTitle}>
-              {chapter.text}
-              {chapter.completed && <b>_________________ЗАВЕРШЕНО</b>}
-            </p>
-            <SectionList
-              sections={chapter.sections}
-              addNewSection={addNewSection}
-              toggleSectionReady={toggleSectionReady}
-              chapterIndex={index}/>
-          </div>
-        ))
-      }
+      <SortableList onSortEnd={onSortEnd} />
 
       <form
         onSubmit={(e) => handleSubmit(e)}
+        className={styles.form}
       >
         <input type="text" name="text"/>
         <button>Add chapter</button>

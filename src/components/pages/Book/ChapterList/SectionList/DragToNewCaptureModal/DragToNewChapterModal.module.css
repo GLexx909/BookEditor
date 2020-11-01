@@ -1,0 +1,49 @@
+.overlay {
+    background-color: #fff;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+
+    margin: auto auto;
+
+    width: 50vw;
+    height: 50vh;
+
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.body {
+    background-color: #fff;
+    padding: 10px;
+}
+
+.discount {
+    margin-top: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.drag {
+    height: max-content;
+    margin: auto 0;
+}
+
+.buttonClose {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 25px;
+}
+
+.modalChapterContainer {
+    margin: 10px;
+    background-color: burlywood;
+    display: flex;
+    justify-content: space-between;
+}

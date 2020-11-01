@@ -1,19 +1,18 @@
 import React from 'react'
-import store from "../../../../redux/store";
+import { connect } from 'react-redux'
 
-const ChaptersInfo = () => {
-  const { chapters } = store.getState()
+const mapStateToProps = ({ chapters }) => {
+  return { chapters }
+}
 
-  store.subscribe(() => {
-    console.log(store.getState())
-  })
+const ChaptersInfo = ({ chapters }) => {
 
   return (
     <div>
       {
-        chapters.length && chapters.map((chapter) => (
-          <p>
-            {chapter.text + '    имеет'}
+        chapters.length > 0 && chapters.map((chapter, index) => (
+          <p key={index}>
+            {chapter.text + '    имеет '}
             <b>{chapter.sections.length + ' подразделов'}</b>
           </p>
         ))
@@ -22,4 +21,4 @@ const ChaptersInfo = () => {
   )
 }
 
-export default ChaptersInfo
+export default connect(mapStateToProps)(ChaptersInfo)
