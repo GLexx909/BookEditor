@@ -4,7 +4,7 @@ import styles from './DragToNewChapterModal.module.css'
 import {connect} from "react-redux";
 import {
   moveSection
-} from "../../../../../../redux/actions/chapters";
+} from "../../../../../../redux/slices/chapters";
 
 class DragToNewChapterModal extends React.Component {
 
@@ -23,7 +23,7 @@ class DragToNewChapterModal extends React.Component {
 
   dropSection(index){
     this.toggleModal()
-    this.props.moveSection(this.props.chapterIndex, index, this.props.sectionIndex)
+    this.props.moveSection({ oldChapterIndex: this.props.chapterIndex, newChapterIndex: index, sectionIndex: this.props.sectionIndex })
   }
 
   render() {
@@ -35,7 +35,7 @@ class DragToNewChapterModal extends React.Component {
             <div className={styles.overlay}>
               <div className={styles.body}>
 
-                { this.props.chapters.map((chapter, index) => (
+                { this.props.chapters.entries.map((chapter, index) => (
                   <div  key={index} className={styles.modalChapterContainer}>
                     <p>{chapter.text}</p>
                     <button onClick={() => this.dropSection(index)}>Перенести сюда</button>

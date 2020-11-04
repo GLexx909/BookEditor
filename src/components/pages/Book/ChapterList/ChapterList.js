@@ -3,7 +3,16 @@ import styles from './index.module.css'
 import SectionList from "./SectionList/SectionList";
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
-const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSections, sortChapters, sortSections }) => {
+const ChapterList = ({ chapters,
+                       addChapter,
+                       addSection,
+                       toggleSection,
+                       filterCompletedSections,
+                       filterNotCompletedSections,
+                       filterAllSections,
+                       sortChapters,
+                       sortSections,
+                       undo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -13,16 +22,16 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSe
 
   const addNewSection = (e, chapterIndex) => {
     e.preventDefault()
-    addSection(e.target.text.value, chapterIndex)
+    addSection({text: e.target.text.value, chapterIndex})
     e.target.text.value = ''
   }
 
   const toggleSectionReady = (chapterIndex, sectionIndex) => {
-    toggleSection(chapterIndex, sectionIndex)
+    toggleSection({ chapterIndex, sectionIndex })
   }
 
   const onSortEnd = ({oldIndex, newIndex}) => {
-    sortChapters(oldIndex, newIndex)
+    sortChapters({ oldIndex, newIndex })
   };
 
   const SortableChapter = SortableElement(({ chapter, chapterIndex }) => (
@@ -35,7 +44,9 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSe
           sections={chapter.sections}
           addNewSection={addNewSection}
           toggleSectionReady={toggleSectionReady}
-          filterSections={filterSections}
+          filterCompletedSections={filterCompletedSections}
+          filterNotCompletedSections={filterNotCompletedSections}
+          filterAllSections={filterAllSections}
           sortSections={sortSections}
           chapterIndex={chapterIndex}/>
       </li>
@@ -44,7 +55,7 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSe
   const SortableList = SortableContainer(() => {
     return (
       <ul>
-        { chapters && chapters.map((chapter, index) => (
+        { chapters[0] && chapters.map((chapter, index) => (
           <SortableChapter key={index} chapter={chapter} index={index} chapterIndex={index}/>
         ))}
       </ul>
@@ -62,6 +73,8 @@ const ChapterList = ({ chapters, addChapter, addSection, toggleSection, filterSe
         <input type="text" name="text"/>
         <button>Add chapter</button>
       </form>
+
+      <button style={styles.undoButton} onClick={() => undo()}>UNDO</button>
 
     </div>
   )

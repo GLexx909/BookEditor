@@ -1,19 +1,51 @@
 import React from 'react'
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-
+import {BrowserRouter, matchPath, Route, Switch} from "react-router-dom";
+import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 
 import Main from "./components/pages/Main";
 
-class App extends React.Component {
+import { fetchChapters } from './redux/slices/chapters'
 
+store.dispatch(fetchChapters())
+
+const history = createBrowserHistory()
+
+const routes = [
+  {
+    component: Main,
+    exact: true,
+    strict: true,
+    path: '/',
+    loadData: () => {
+      return store.dispatch(fetchChapters())
+    }
+  }
+]
+
+const onLoad = () => {
+  routes.some(route => {
+    const match = matchPath(window.location.pathname, route)
+    if (match && route.loadData) route.loadData(match)
+  })
+}
+
+history.listen(() => {
+  onLoad()
+})
+
+class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter history={history}>
           <Switch>
-            <Route component={Main} path='/' exact />
+            {
+              routes.map((route, idx) => (
+                <Route {...route} key={idx} />
+              ))
+            }
           </Switch>
         </BrowserRouter>
       </Provider>

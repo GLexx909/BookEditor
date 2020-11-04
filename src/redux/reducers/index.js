@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 
-import { chapters } from "./chapters";
+import chapters from "../slices/chapters";
+import undoable from 'redux-undo'
 
 export default combineReducers(
   {
-    chapters
+    chapters: undoable(chapters)
   }
 )
