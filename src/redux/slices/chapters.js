@@ -44,24 +44,15 @@ const chaptersSlice = createSlice({
   initialState,
   reducers: {
     addChapter(state, action) {
-      return {
-        ...state,
-        entries: state.entries.concat({ text: action.payload, completed: false, sections: [], sectionFilter: 'FILTER_ALL_SECTIONS' })
-      }
+      state.entries = state.entries.concat({ text: action.payload, completed: false, sections: [], sectionFilter: 'FILTER_ALL_SECTIONS' })
     },
 
     addSection(state, action) {
-      return {
-        ...state,
-        entries: state.entries.map((chapter, index) => {
-          return index === action.payload.chapterIndex
-            ? {
-              ...chapter,
-              sections: chapter.sections.concat({text: action.payload.text, completed: false, modalOpen: false})
-            }
-            : chapter
-        })
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.chapterIndex) {
+          chapter.sections = chapter.sections.concat({text: action.payload.text, completed: false, modalOpen: false})
+        }
+      })
     },
 
     toggleSection(state, action) {
@@ -70,104 +61,68 @@ const chaptersSlice = createSlice({
       const isSectionAlone = theUncompletedSections.length === 1
       const isChapterCompleted = isSectionAlone && theChapter.sections.indexOf(theUncompletedSections[0]) === action.payload.sectionIndex
 
-      return {
-        ...state,
-        entries: state.entries.map((chapter, index) => (
-          index === action.payload.chapterIndex
-            ? {...chapter, sections: mapSectionToggle(chapter, action.payload.sectionIndex), completed: isChapterCompleted }
-            : chapter
-        ))
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.chapterIndex) {
+          chapter.sections = mapSectionToggle(chapter, action.payload.sectionIndex)
+          chapter.completed = isChapterCompleted
+        }
+      })
     },
 
     sortChapters(state, action) {
-      return {
-        ...state,
-        entries: arrayMove(state.entries, action.payload.oldIndex, action.payload.newIndex)
-      }
+      state.entries = arrayMove(state.entries, action.payload.oldIndex, action.payload.newIndex)
     },
 
     sortSections(state, action) {
-      return {
-        ...state,
-        entries: state.entries.map((chapter, index) => (
-          index === action.payload.chapterIndex
-            ? {...chapter, sections: arrayMove(chapter.sections, action.payload.oldIndex, action.payload.newIndex) }
-            : chapter
-        ))
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.chapterIndex) {
+          chapter.sections = arrayMove(chapter.sections, action.payload.oldIndex, action.payload.newIndex)
+        }
+      })
     },
 
     moveSection(state, action) {
       const sectionObject = state.entries[action.payload.oldChapterIndex].sections[action.payload.sectionIndex]
 
-      const newState = state.entries.map((chapter, index) => {
+      state.entries.map((chapter, index) => {
         if (index === action.payload.oldChapterIndex) {
-          return {
-            ...chapter,
-            sections: chapter.sections.filter((_, index) => index !== action.payload.sectionIndex)
-          }
+          chapter.sections = chapter.sections.filter((_, index) => index !== action.payload.sectionIndex)
         } else if (index === action.payload.newChapterIndex) {
-          return {
-            ...chapter,
-            sections: chapter.sections.concat(sectionObject)
-          }
-        } else {
-          return chapter
+          chapter.sections = chapter.sections.concat(sectionObject)
         }
       })
 
-      return {
-        ...newState,
-        entries: newState.map((chapter, index) => {
-          if (index === action.payload.oldChapterIndex) {
-            return {
-              ...chapter,
-              completed: isAnyUncompletedSectionPresent(chapter)
-            }
-          } else if (index === action.payload.newChapterIndex) {
-            return {
-              ...chapter,
-              completed: isAnyUncompletedSectionPresent(chapter)
-            }
-          } else {
-            return chapter
-          }
-        })
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.oldChapterIndex) {
+          chapter.completed = isAnyUncompletedSectionPresent(chapter)
+        } else if (index === action.payload.newChapterIndex) {
+          chapter.completed =  isAnyUncompletedSectionPresent(chapter)
+        }
+      })
     },
 
     filterCompletedSections(state, action) {
-      return {
-        ...state,
-        entries: state.entries.map((chapter, index) => (
-          index === action.payload.chapterIndex
-            ? {...chapter, sectionFilter: 'FILTER_COMPLETED_SECTIONS'}
-            : chapter
-        ))
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.chapterIndex) {
+          chapter.sectionFilter = 'FILTER_COMPLETED_SECTIONS'
+        }
+      })
     },
 
     filterNotCompletedSections(state, action) {
-      return {
-        ...state,
-        entries: state.entries.map((chapter, index) => (
-          index === action.payload.chapterIndex
-            ? {...chapter, sectionFilter: 'FILTER_NOT_COMPLETED_SECTIONS'}
-            : chapter
-        ))
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.chapterIndex) {
+          chapter.sectionFilter = 'FILTER_NOT_COMPLETED_SECTIONS'
+        }
+      })
     },
 
     filterAllSections(state, action) {
-      return {
-        ...state,
-        entries: state.entries.map((chapter, index) => (
-          index === action.payload.chapterIndex
-            ? {...chapter, sectionFilter: 'FILTER_ALL_SECTIONS'}
-            : chapter
-        ))
-      }
+      state.entries.map((chapter, index) => {
+        if (index === action.payload.chapterIndex) {
+          chapter.sectionFilter = 'FILTER_ALL_SECTIONS'
+        }
+      })
     }
 
   },

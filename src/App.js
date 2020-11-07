@@ -8,8 +8,6 @@ import Main from "./components/pages/Main";
 
 import { fetchChapters } from './redux/slices/chapters'
 
-store.dispatch(fetchChapters())
-
 const history = createBrowserHistory()
 
 const routes = [
@@ -34,6 +32,8 @@ const onLoad = () => {
 history.listen(() => {
   onLoad()
 })
+
+onLoad()
 
 class App extends React.Component {
   render() {

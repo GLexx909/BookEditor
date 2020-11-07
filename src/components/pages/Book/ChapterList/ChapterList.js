@@ -74,7 +74,7 @@ const ChapterList = ({ chapters,
         <button>Add chapter</button>
       </form>
 
-      <button style={styles.undoButton} onClick={() => undo()}>UNDO</button>
+      <button className={styles.undoButton} onClick={() => undo()}>UNDO</button>
 
     </div>
   )
