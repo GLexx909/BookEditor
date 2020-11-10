@@ -24,6 +24,20 @@ export const fetchChapters = createAsyncThunk(
   }
 )
 
+export const postChapter = async (state) => {
+  const response = await axios({
+    method: 'PUT',
+    url: 'https://chapters-5dc5.restdb.io/rest/chapters/5f9fae4bee7ecf5f00002310?key=d124f06e3d67b525dcb881b81052eebf4c499',
+    headers: {
+      'cache-control': 'no-cache',
+      'x-apikey': '5f9fbf8e231ba42851b4a072',
+      'content-type': 'application/json'
+    },
+    data: { data: JSON.stringify(state) },
+    json: true
+  })
+}
+
 const mapSectionToggle = (chapter, sectionIndex) => {
   return chapter.sections.map((section, index) => (
     index === sectionIndex
@@ -45,6 +59,7 @@ const chaptersSlice = createSlice({
   reducers: {
     addChapter(state, action) {
       state.entries = state.entries.concat({ text: action.payload, completed: false, sections: [], sectionFilter: 'FILTER_ALL_SECTIONS' })
+      postChapter(state.entries)
     },
 
     addSection(state, action) {
@@ -53,6 +68,7 @@ const chaptersSlice = createSlice({
           chapter.sections = chapter.sections.concat({text: action.payload.text, completed: false, modalOpen: false})
         }
       })
+      postChapter(state.entries)
     },
 
     toggleSection(state, action) {
@@ -67,10 +83,12 @@ const chaptersSlice = createSlice({
           chapter.completed = isChapterCompleted
         }
       })
+      postChapter(state.entries)
     },
 
     sortChapters(state, action) {
       state.entries = arrayMove(state.entries, action.payload.oldIndex, action.payload.newIndex)
+      postChapter(state.entries)
     },
 
     sortSections(state, action) {
@@ -79,6 +97,7 @@ const chaptersSlice = createSlice({
           chapter.sections = arrayMove(chapter.sections, action.payload.oldIndex, action.payload.newIndex)
         }
       })
+      postChapter(state.entries)
     },
 
     moveSection(state, action) {
@@ -99,6 +118,8 @@ const chaptersSlice = createSlice({
           chapter.completed =  isAnyUncompletedSectionPresent(chapter)
         }
       })
+
+      postChapter(state.entries)
     },
 
     filterCompletedSections(state, action) {
