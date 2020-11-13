@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { chapterPath } from '../../../../helpers/routes'
 
 const mapStateToProps = ({ chapters }) => {
-  return { chapters }
+  return { chapters: chapters.present.entries }
 }
 
 const ChaptersInfo = ({ chapters }) => {
@@ -12,14 +12,14 @@ const ChaptersInfo = ({ chapters }) => {
   return (
     <div>
       {
-        chapters.present.entries.length > 0 && chapters.present.entries.map((chapter, index) => (
+        chapters.length > 0 && chapters.map((chapter, index) => (
           <div key={index}>
             <Link  to={chapterPath(index)}>
               <p >
                 {chapter.text + '    имеет '}
               </p>
             </Link>
-            <b>{chapter.sections.length + ' подразделов'}</b>
+            <b>{chapter.sections.length} подразделов</b>
           </div>
         ))
       }

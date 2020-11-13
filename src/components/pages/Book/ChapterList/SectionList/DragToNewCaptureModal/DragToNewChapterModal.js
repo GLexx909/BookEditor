@@ -35,7 +35,7 @@ class DragToNewChapterModal extends React.Component {
             <div className={styles.overlay}>
               <div className={styles.body}>
 
-                { this.props.chapters.present.entries.map((chapter, index) => (
+                { this.props.chapters.map((chapter, index) => (
                   <div  key={index} className={styles.modalChapterContainer}>
                     <p>{chapter.text}</p>
                     <button onClick={() => this.dropSection(index)}>Перенести сюда</button>
@@ -54,7 +54,7 @@ class DragToNewChapterModal extends React.Component {
 }
 
 const mapStateToProps = ({ chapters }) => {
-  return { chapters }
+  return { chapters: chapters.present.entries }
 }
 
 const mapDispatchToProps = {

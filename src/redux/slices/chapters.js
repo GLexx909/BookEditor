@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import axiosClient from '../../helpers/httpClient'
 import arrayMove from "array-move";
+const BOOK = '5f9fae4bee7ecf5f00002310'
 
 const initialState = {
   isLoading: false,
@@ -12,30 +13,16 @@ const initialState = {
 export const fetchChapters = createAsyncThunk(
   'chapters/fetchAll',
   async () => {
-    const response = await axios({
-      method: 'GET',
-      url: 'https://chapters-5dc5.restdb.io/rest/chapters?key=d124f06e3d67b525dcb881b81052eebf4c499',
-      headers: {
-        'x-apikey': '5f9fbf8e231ba42851b4a072'
-      }
-    })
-
+    const response = await axiosClient.get('')
     return response.data[0].data
   }
 )
 
 export const postChapter = async (state) => {
-  const response = await axios({
-    method: 'PUT',
-    url: 'https://chapters-5dc5.restdb.io/rest/chapters/5f9fae4bee7ecf5f00002310?key=d124f06e3d67b525dcb881b81052eebf4c499',
-    headers: {
-      'cache-control': 'no-cache',
-      'x-apikey': '5f9fbf8e231ba42851b4a072',
-      'content-type': 'application/json'
-    },
-    data: { data: JSON.stringify(state) },
-    json: true
-  })
+  await axiosClient.put(
+    BOOK,
+    { data: JSON.stringify(state) }
+  )
 }
 
 const mapSectionToggle = (chapter, sectionIndex) => {
