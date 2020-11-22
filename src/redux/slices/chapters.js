@@ -13,14 +13,14 @@ const initialState = {
 export const fetchChapters = createAsyncThunk(
   'chapters/fetchAll',
   async () => {
-    const response = await axiosClient.get('')
+    const response = await axiosClient.get('chapters')
     return response.data[0].data
   }
 )
 
 export const postChapter = async (state) => {
   await axiosClient.put(
-    BOOK,
+    `chapters/${BOOK}`,
     { data: JSON.stringify(state) }
   )
 }

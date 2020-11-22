@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://chapters-5dc5.restdb.io/rest/chapters",
+  baseURL: "https://chapters-5dc5.restdb.io/rest",
   timeout: 2000,
   headers: {
     'cache-control': 'no-cache',
