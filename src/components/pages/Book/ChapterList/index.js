@@ -1,14 +1,17 @@
 import { connect } from 'react-redux'
+import { ActionCreators } from 'redux-undo'
 
 import ChapterList from './ChapterList'
 import {
   addChapter,
   addSection,
   toggleSection,
-  filterSections,
+  filterCompletedSections,
+  filterNotCompletedSections,
+  filterAllSections,
   sortChapters,
   sortSections
-} from '../../../../redux/actions/chapters'
+} from '../../../../redux/slices/chapters'
 
 const filters = {
   FILTER_ALL_SECTIONS: () => true,
@@ -16,21 +19,24 @@ const filters = {
   FILTER_NOT_COMPLETED_SECTIONS: (sec) => !sec.completed
 }
 
-const mapStateToProps = ({ chapters }) => (
-  {
-    chapters: chapters.map((chapter) => (
-      { ...chapter, sections: chapter.sections.filter(filters[chapter.sectionFilter]) }
+const mapStateToProps = ({ chapters }) => {
+  return {
+    chapters: chapters.present.entries.map((chapter) => (
+      {...chapter, sections: chapter.sections.filter(filters[chapter.sectionFilter])}
     ))
   }
-)
+}
 
 const mapDispatchToProps = {
   addChapter,
   addSection,
   toggleSection,
-  filterSections,
+  filterCompletedSections,
+  filterNotCompletedSections,
+  filterAllSections,
   sortChapters,
-  sortSections
+  sortSections,
+  undo: () => ActionCreators.undo()
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChapterList)

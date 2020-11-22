@@ -1,17 +1,23 @@
 import React from 'react'
 import styles from './index.module.css'
-import * as chapterActions from '../../../../../redux/actionTypes/chapters'
 import DragToNewChapterModal from "./DragToNewCaptureModal/DragToNewChapterModal";
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
-const SectionList = ({ sections, addNewSection, chapterIndex, toggleSectionReady, filterSections, sortSections }) => {
+const SectionList = ({ sections,
+                       addNewSection,
+                       chapterIndex,
+                       toggleSectionReady,
+                       filterCompletedSections,
+                       filterNotCompletedSections,
+                       filterAllSections,
+                       sortSections }) => {
 
-  const showAll = () => filterSections(chapterIndex, chapterActions.FILTER_ALL_SECTIONS)
-  const showCompleted = () => filterSections(chapterIndex, chapterActions.FILTER_COMPLETED_SECTIONS)
-  const showNotCompleted = () => filterSections(chapterIndex, chapterActions.FILTER_NOT_COMPLETED_SECTIONS)
+  const showAll = () => filterAllSections({chapterIndex})
+  const showCompleted = () => filterCompletedSections({chapterIndex})
+  const showNotCompleted = () => filterNotCompletedSections({chapterIndex})
 
   const onSortEnd = ({oldIndex, newIndex}) => {
-    sortSections(chapterIndex, oldIndex, newIndex)
+    sortSections({ chapterIndex, oldIndex, newIndex })
   };
 
   const SortableChapter = SortableElement(({ section, sectionIndex }) => (
