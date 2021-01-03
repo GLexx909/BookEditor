@@ -1,0 +1,21 @@
+import {Provider} from "react-redux";
+---
+name: ChapterList
+---
+
+import { Provider } from 'react-redux'
+import { Playground } from "docz";
+import { createStore } from 'redux'
+import chaptersMock from '../../../../mocks/chapters'
+import reducer from '../../../../redux/reducers/index'
+import ChapterList from '../index'
+
+# Main
+
+
+<Playground>
+  <Provider store={createStore(reducer, { chapters: chaptersMock })}>
+    <ChapterList />
+  </Provider>
+</Playground>
+

@@ -51,7 +51,7 @@ const SectionList = ({ sections,
       <form
         onSubmit={(e) => addNewSection(e, chapterIndex)}
       >
-        <input className={styles.input} type="text" name="text"/>
+        <input className={styles.input} type="text" name="section" placeholder='add new section name'/>
         <button>Add section</button>
       </form>
 

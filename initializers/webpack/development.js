@@ -8,7 +8,7 @@ module.exports = {
     bundle: './src/index.js'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(process.cwd(), 'src'),
     compress: true,
     port: 9000,
     historyApiFallback: true
@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    modules: [path.resolve(process.cwd(), 'src'), 'node_modules']
   },
   module: {
     rules: [

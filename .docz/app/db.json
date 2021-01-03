@@ -1,0 +1,193 @@
+{
+  "config": {
+    "title": "Bookeditor",
+    "description": "My awesome app using docz",
+    "menu": [],
+    "version": "1.0.0",
+    "repository": null,
+    "native": false,
+    "themeConfig": {},
+    "separator": "-"
+  },
+  "entries": [
+    {
+      "key": "README.md",
+      "value": {
+        "id": "04c6e90faac2675aa89e2176d2eec7d8",
+        "filepath": "README.md",
+        "fullpath": "/home/lexx/Projects/React/Thinknetica/BookEditor/README.md",
+        "link": "",
+        "hidden": false,
+        "slug": "readme",
+        "route": "/readme",
+        "name": "Readme",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "описание-приложения",
+            "depth": 3,
+            "value": "Описание приложения"
+          },
+          {
+            "slug": "возможные-действия",
+            "depth": 4,
+            "value": "Возможные действия:"
+          }
+        ]
+      }
+    },
+    {
+      "key": "src/components/pages/Book/ChapterList/ChapterList.mdx",
+      "value": {
+        "id": "74c48f23a40ad4e8b84425fffb02439e",
+        "filepath": "src/components/pages/Book/ChapterList/ChapterList.mdx",
+        "fullpath": "/home/lexx/Projects/React/Thinknetica/BookEditor/src/components/pages/Book/ChapterList/ChapterList.mdx",
+        "link": "",
+        "hidden": false,
+        "slug": "src-components-pages-book-chapter-list-chapter-list",
+        "route": "/src-components-pages-book-chapter-list-chapter-list",
+        "name": "Chapter list",
+        "menu": "",
+        "headings": [
+          {
+            "slug": "import-provider-from-react-redux",
+            "depth": 2,
+            "value": "import {Provider} from \"react-redux\";"
+          },
+          {
+            "slug": "name-chapterlist",
+            "depth": 2,
+            "value": "name: ChapterList"
+          },
+          {
+            "slug": "main",
+            "depth": 1,
+            "value": "Main"
+          }
+        ]
+      }
+    }
+  ],
+  "props": [
+    {
+      "key": "src/App.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "App",
+          "methods": [],
+          "actualName": "App"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Book/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Book",
+          "methods": [],
+          "actualName": "Book"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Chapter/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Chapter",
+          "methods": [],
+          "actualName": "Chapter"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Main/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Main",
+          "methods": [],
+          "actualName": "Main"
+        }
+      ]
+    },
+    {
+      "key": "src/components/shared/Layout/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Layout",
+          "methods": [],
+          "actualName": "Layout"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Book/ChapterList/ChapterList.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "ChapterList",
+          "methods": [],
+          "actualName": "ChapterList"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Book/ChaptersInfo/index.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "ChaptersInfo",
+          "methods": [],
+          "actualName": "ChaptersInfo"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Book/ChapterList/SectionList/SectionList.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "SectionList",
+          "methods": [],
+          "actualName": "SectionList"
+        }
+      ]
+    },
+    {
+      "key": "src/components/pages/Book/ChapterList/SectionList/DragToNewCaptureModal/DragToNewChapterModal.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "DragToNewChapterModal",
+          "methods": [
+            {
+              "name": "toggleModal",
+              "docblock": null,
+              "modifiers": [],
+              "params": [],
+              "returns": null
+            },
+            {
+              "name": "dropSection",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "index",
+                  "optional": false,
+                  "type": null
+                }
+              ],
+              "returns": null
+            }
+          ],
+          "actualName": "DragToNewChapterModal"
+        }
+      ]
+    }
+  ]
+}

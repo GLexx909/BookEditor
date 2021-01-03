@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter, matchPath, Route, Switch} from "react-router-dom";
+import {Router, matchPath, Route, Switch} from "react-router-dom";
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 import store from './redux/store'
@@ -51,7 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter history={history}>
+        <Router history={history}>
           <Switch>
             {
               routes.map((route, idx) => (
@@ -59,7 +59,7 @@ class App extends React.Component {
               ))
             }
           </Switch>
-        </BrowserRouter>
+        </Router>
       </Provider>
     )
   }

@@ -1,0 +1,109 @@
+.src-components-pages-Book-ChapterList-index-module__container--2Ax1h {
+    width: fit-content;
+    margin: 50px auto;
+}
+
+.src-components-pages-Book-ChapterList-index-module__chapterTitle--376S4 {
+    border-bottom: 3px solid black;
+    cursor: pointer;
+}
+
+.src-components-pages-Book-ChapterList-index-module__chapterTitle--376S4:hover {
+    background-color: aqua;
+    opacity: 0.5;
+}
+
+
+.src-components-pages-Book-ChapterList-index-module__form--1e1ca {
+    margin-top: 20px;
+}
+
+.src-components-pages-Book-ChapterList-index-module__undoButton--LLnty {
+    margin-top: 10px;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-index-module__container--2qPew {
+    margin-left: 20px;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-index-module__input--29N2V {
+    background-color: burlywood;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-index-module__sectionBlock--3zTln {
+    display: flex;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-index-module__sectionBlock--3zTln > p:hover {
+    background-color: aqua;
+    cursor: pointer;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-index-module__sectionBlock--3zTln input {
+    margin: auto 0;
+    margin-right: 10px;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-DragToNewCaptureModal-DragToNewChapterModal-module__overlay--f6T6Q {
+    background-color: #fff;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    /*right: 0;*/
+
+    margin: auto auto;
+
+    width: 50vw;
+    height: 50vh;
+
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-DragToNewCaptureModal-DragToNewChapterModal-module__body--3UC6B {
+    background-color: #fff;
+    padding: 10px;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-DragToNewCaptureModal-DragToNewChapterModal-module__discount--r9SBT {
+    margin-top: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-DragToNewCaptureModal-DragToNewChapterModal-module__drag--3JLYE {
+    height: max-content;
+    margin: auto 0;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-DragToNewCaptureModal-DragToNewChapterModal-module__buttonClose--t5D-9 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 25px;
+}
+
+.src-components-pages-Book-ChapterList-SectionList-DragToNewCaptureModal-DragToNewChapterModal-module__modalChapterContainer--mt5Vt {
+    margin: 10px;
+    background-color: burlywood;
+    display: flex;
+    justify-content: space-between;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: darkgrey;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/*# sourceMappingURL=bundle.cdbdcef2b7766e426c9a.css.map*/

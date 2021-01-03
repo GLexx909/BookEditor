@@ -16,14 +16,14 @@ const ChapterList = ({ chapters,
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addChapter(e.target.text.value)
-    e.target.text.value = ''
+    addChapter(e.target.elements.text.value)
+    e.target.elements.text.value = ''
   }
 
   const addNewSection = (e, chapterIndex) => {
     e.preventDefault()
-    addSection({text: e.target.text.value, chapterIndex})
-    e.target.text.value = ''
+    addSection({text: e.target.elements.section.value, chapterIndex})
+    e.target.elements.section.value = ''
   }
 
   const toggleSectionReady = (chapterIndex, sectionIndex) => {
@@ -70,7 +70,7 @@ const ChapterList = ({ chapters,
         onSubmit={(e) => handleSubmit(e)}
         className={styles.form}
       >
-        <input type="text" name="text"/>
+        <input type="text" name="text" placeholder="add new chapter name"/>
         <button>Add chapter</button>
       </form>
 
